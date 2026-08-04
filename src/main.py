@@ -7,7 +7,7 @@ from discord import app_commands
 load_dotenv()
 
 
-class MeshibanClient(discord.Client):
+class NandemoClient(discord.Client):
     def __init__(self, *, intents: discord.Intents):
         super().__init__(intents=intents)
         self.tree = app_commands.CommandTree(self)
@@ -22,7 +22,7 @@ class MeshibanClient(discord.Client):
 
 
 intents = discord.Intents.default()
-client = MeshibanClient(intents=intents)
+client = NandemoClient(intents=intents)
 tree = client.tree
 
 

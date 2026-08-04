@@ -1,8 +1,8 @@
-# 飯番 meshiban
+# nandemo
 
 ## 概要
 
-今日飯を作るやつを決めるDiscord BOT
+なんでもDiscord BOT
 
 ## 技術スタック
 

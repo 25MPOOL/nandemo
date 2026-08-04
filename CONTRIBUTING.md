@@ -20,4 +20,4 @@
 
 PRテンプレートに従い記述する
 
-参考: [PRテンプレート](https://github.com/25MPOOL/meshiban/blob/main/.github/pull_request_template.md)
+参考: [PRテンプレート](https://github.com/25MPOOL/nandemo/blob/main/.github/pull_request_template.md)
