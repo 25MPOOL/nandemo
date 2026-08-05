@@ -35,5 +35,6 @@ post-merge:
 post-checkout:
   jobs:
     - name: uv-sync
-      run: |
-        if git diff-tree -r --name-only --no-commit-id {1} {2} 2>/dev/null | grep -qE '^(pyproject\.toml|uv\.lock)$'; then uv sync; fi
+      files: git diff-tree -r --name-only --no-commit-id "HEAD@{1}" HEAD 2>/dev/null || true
+      glob: "{pyproject.toml,uv.lock}"
+      run: uv sync
