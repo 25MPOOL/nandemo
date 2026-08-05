@@ -22,3 +22,14 @@ pre-commit:
       glob: "*.py"
       run: uv run ruff format {staged_files}
       stage_fixed: true
+
+# コミットメッセージが Conventional Commits 形式か (CONTRIBUTING.md 参照)
+commit-msg:
+  jobs:
+    - name: check-commit-message
+      run: |
+        head -n1 {1} | grep -qE '^((feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert)(\(.+\))?!?: .+|(Merge|Revert|fixup!|squash!) )' || {
+          echo "コミットメッセージが Conventional Commits 形式ではありません (参考: CONTRIBUTING.md)"
+          echo "例: feat: add weekly menu command"
+          exit 1
+        }
