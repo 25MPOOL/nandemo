@@ -33,3 +33,9 @@ commit-msg:
           echo "例: feat: add weekly menu command"
           exit 1
         }
+
+# push 前にテストを実行
+pre-push:
+  jobs:
+    - name: test
+      run: uv run pytest
