@@ -1,0 +1,24 @@
+# https://lefthook.dev/configuration/
+pre-commit:
+  jobs:
+    # マージコンフリクトのマーカーが残っていないか
+    - name: check-merge-conflict
+      run: |
+        ! grep -EInH '^(<{7} |>{7} |\|{7} |={7}$)' {staged_files}
+
+    # 秘密鍵が含まれていないか
+    - name: detect-private-key
+      exclude:
+        - lefthook.yml
+      run: |
+        ! grep -EIlH 'BEGIN .*PRIVATE KEY' {staged_files}
+
+    - name: ruff-check
+      glob: "*.py"
+      run: uv run ruff check --fix {staged_files}
+      stage_fixed: true
+
+    - name: ruff-format
+      glob: "*.py"
+      run: uv run ruff format {staged_files}
+      stage_fixed: true
