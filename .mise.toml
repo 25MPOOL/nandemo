@@ -1,10 +1,11 @@
 [tools]
 python = "3.12"
 uv = "0.10.11"
+lefthook = "2.1.10"
 
 [tasks.setup]
 description = "プロジェクトの初期セットアップ"
-run = "uv sync"
+run = ["uv sync", "lefthook install"]
 
 [tasks.sync]
 description = "Discord Botのコマンドを同期"

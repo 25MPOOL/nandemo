@@ -3,14 +3,14 @@
     "github>suzuki-shunsuke/renovate-config#4.0.0",
     "github>aquaproj/aqua-renovate-config:file#2.11.0(aqua/.*\\.ya?ml)",
   ],
- 
+
   packageRules: [
     {
       matchPackageNames: ["python"],
       enabled: false,
     },
   ],
- 
+
   // ラベル付け
   "labels": ["dependencies", "renovate"],
 }

@@ -1,0 +1,38 @@
+# https://lefthook.dev/configuration/
+pre-commit:
+  jobs:
+    - name: ruff-check
+      glob: "*.py"
+      run: uv run ruff check --fix {staged_files}
+      stage_fixed: true
+
+    - name: ruff-format
+      glob: "*.py"
+      run: uv run ruff format {staged_files}
+      stage_fixed: true
+
+commit-msg:
+  jobs:
+    - name: check-commit-message
+      run: |
+        head -1 {1} | grep -qE '^(feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert)(\(.+\))?!?: .+|^(Merge|Revert|fixup!|squash!) ' ||
+          { echo "Conventional Commits 形式で書いてください (例: feat: add weekly menu command)"; exit 1; }
+
+pre-push:
+  jobs:
+    - name: test
+      run: uv run pytest
+
+post-merge:
+  jobs:
+    - name: uv-sync
+      files: git diff-tree -r --name-only --no-commit-id ORIG_HEAD HEAD
+      glob: "{pyproject.toml,uv.lock}"
+      run: uv sync
+
+post-checkout:
+  jobs:
+    - name: uv-sync
+      files: git diff-tree -r --name-only --no-commit-id "HEAD@{1}" HEAD 2>/dev/null || true
+      glob: "{pyproject.toml,uv.lock}"
+      run: uv sync
