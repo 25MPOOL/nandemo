@@ -1,0 +1,4 @@
+# lefthook の各ジョブ実行前に source される (lefthook.yml の rc 参照)
+# GUI クライアント等の mise が activate されていない環境でも
+# mise 管理のツール (uv, python) を見つけられるようにする
+export PATH="$HOME/.local/share/mise/shims:$PATH"

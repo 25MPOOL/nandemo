@@ -1,4 +1,6 @@
 # https://lefthook.dev/configuration/
+rc: .lefthookrc
+
 pre-commit:
   jobs:
     # マージコンフリクトのマーカーが残っていないか
