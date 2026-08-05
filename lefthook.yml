@@ -39,3 +39,16 @@ pre-push:
   jobs:
     - name: test
       run: uv run pytest
+
+# uv.lock の変更を環境に反映 (merge 後・ブランチ切替後)
+post-merge:
+  jobs:
+    - name: uv-sync
+      run: uv sync
+
+post-checkout:
+  jobs:
+    - name: uv-sync
+      # ブランチ切替時のみ ({3} が 1)。ファイル単位の checkout では実行しない
+      run: |
+        if [ "{3}" = "1" ]; then uv sync; fi
