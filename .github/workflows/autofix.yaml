@@ -1,6 +1,6 @@
 ---
 name: autofix.ci
-on: 
+on:
   pull_request:
     paths:
       - 'aqua/**'
