@@ -37,3 +37,9 @@ mise install
 ```bash
 mise run setup
 ```
+
+`.env.example` をコピーして `.env` を作成し、`DISCORD_TOKEN` を設定
+
+```bash
+cp .env.example .env
+```
