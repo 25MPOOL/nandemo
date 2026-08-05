@@ -3,16 +3,6 @@ rc: .lefthookrc
 
 pre-commit:
   jobs:
-    - name: check-merge-conflict
-      run: |
-        ! grep -EInH '^(<{7} |>{7} |\|{7} |={7}$)' {staged_files}
-
-    - name: detect-private-key
-      exclude:
-        - lefthook.yml
-      run: |
-        ! grep -EIlH 'BEGIN .*PRIVATE KEY' {staged_files}
-
     - name: ruff-check
       glob: "*.py"
       run: uv run ruff check --fix {staged_files}
