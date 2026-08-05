@@ -43,11 +43,12 @@ pre-push:
 post-merge:
   jobs:
     - name: uv-sync
+      files: git diff-tree -r --name-only --no-commit-id ORIG_HEAD HEAD
+      glob: "{pyproject.toml,uv.lock}"
       run: uv sync
 
 post-checkout:
   jobs:
     - name: uv-sync
-      # ブランチ切替時のみ ({3} が 1)。ファイル単位の checkout では実行しない
       run: |
-        if [ "{3}" = "1" ]; then uv sync; fi
+        if git diff-tree -r --name-only --no-commit-id {1} {2} 2>/dev/null | grep -qE '^(pyproject\.toml|uv\.lock)$'; then uv sync; fi
